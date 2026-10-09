@@ -8,6 +8,7 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
+import { VercelAnalytics } from "./components/analytics";
 import { ChatButton, SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
 import { ButtonLink, Container } from "./components/ui";
@@ -49,6 +50,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <main id="main">{children}</main>
         <SiteFooter />
         <ChatButton />
+        <VercelAnalytics />
         <ScrollRestoration />
         <Scripts />
       </body>
