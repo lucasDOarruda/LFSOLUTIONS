@@ -1,104 +1,128 @@
-import { Check } from "lucide-react";
-import type { Route } from "./+types/home";
-import { coreServices, differentiators, pillars, site, workflow } from "~/lib/site";
-import { pageMeta } from "~/lib/meta";
+import { Link } from "react-router";
 import {
-  ArrowLink,
-  ButtonLink,
-  Container,
-  CtaBand,
-  Eyebrow,
-  SectionHeading,
-} from "~/components/ui";
+  CalendarClock,
+  Check,
+  ClipboardPen,
+  Headset,
+  MessageCircle,
+  Package,
+  ScreenShare,
+  Settings,
+  Tag,
+  type LucideIcon,
+} from "lucide-react";
+import type { Route } from "./+types/home";
+import { differentiators, site } from "~/lib/site";
+import { pageMeta } from "~/lib/meta";
+import { ArrowLink, Container, CtaBand, cx } from "~/components/ui";
 
 export function meta({}: Route.MetaArgs) {
   return pageMeta(site.name);
 }
 
-const quickSteps = [workflow[0], workflow[1], workflow[4], workflow[6]];
+type Shortcut = {
+  icon: LucideIcon;
+  label: string;
+  hint: string;
+  to: string;
+  external?: boolean;
+  primary?: boolean;
+};
+
+const shortcuts: Shortcut[] = [
+  { icon: ClipboardPen, label: "Report an issue", hint: "Tell us what's wrong", to: "/report-issue", primary: true },
+  { icon: CalendarClock, label: "Book a session", hint: "Pick a time", to: "/book" },
+  { icon: Tag, label: "See pricing", hint: "From $69", to: "/services" },
+  { icon: MessageCircle, label: "Chat with us", hint: "On WhatsApp", to: site.whatsappHref, external: true },
+];
+
+const services = [
+  { icon: Headset, title: "On-demand help", text: "Quick remote fixes. From $69." },
+  { icon: Settings, title: "Setup & config", text: "Email, Microsoft 365, Wi-Fi, printers." },
+  { icon: Package, title: "Monthly plan", text: "Priority support. $220/month." },
+];
+
+const steps = [
+  { icon: ClipboardPen, title: "Tell us", text: "Send a quick report" },
+  { icon: Headset, title: "We reply", text: "Fast, with next steps" },
+  { icon: CalendarClock, title: "Pick a time", text: "Whenever suits you" },
+  { icon: ScreenShare, title: "Sorted", text: "Fixed remotely" },
+];
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Pillars />
       <Services />
-      <HowItWorksPreview />
+      <Steps />
       <WhyUs />
       <CtaBand />
     </>
   );
 }
 
-function Hero() {
+function IconBadge({ icon: Icon, solid }: { icon: LucideIcon; solid?: boolean }) {
   return (
-    <section>
-      <Container className="grid gap-14 py-20 sm:py-28 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-        <div>
-          <Eyebrow>IT support for small businesses · {site.serviceArea}</Eyebrow>
-          <h1 className="mt-4 text-5xl leading-[1.05] sm:text-6xl">
-            Smart support.
-            <br />
-            <span className="text-brand">Simple solutions.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-            Reliable, straightforward IT support for small businesses and busy
-            professionals. Fast remote help, practical fixes, no jargon.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink to="/report-issue" arrow>
-              Report an issue
-            </ButtonLink>
-            <ButtonLink to="/services" variant="secondary">
-              View pricing
-            </ButtonLink>
-          </div>
-          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
-            {["Remote support via TeamViewer", "Pay only once it's fixed", "Upfront pricing"].map(
-              (item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <Check aria-hidden className="size-4 text-brand" /> {item}
-                </li>
-              ),
-            )}
-          </ul>
-        </div>
-
-        <div className="rounded-2xl border border-line bg-subtle p-7 sm:p-8">
-          <p className="text-sm font-medium text-ink">Getting help is simple</p>
-          <ol className="mt-6 space-y-6">
-            {quickSteps.map((step, i) => (
-              <li key={step.title} className="flex gap-4">
-                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white text-sm font-semibold text-brand ring-1 ring-line">
-                  {i + 1}
-                </span>
-                <div>
-                  <p className="font-medium">{step.title}</p>
-                  <p className="mt-0.5 text-sm leading-relaxed text-muted">{step.text}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-7 border-t border-line pt-5 text-sm text-muted">
-            Payment is only processed after the service is completed.
-          </p>
-        </div>
-      </Container>
-    </section>
+    <span
+      className={cx(
+        "grid size-14 shrink-0 place-items-center rounded-2xl",
+        solid ? "bg-white/15 text-white" : "bg-brand-50 text-brand",
+      )}
+    >
+      <Icon aria-hidden className="size-7" strokeWidth={1.75} />
+    </span>
   );
 }
 
-function Pillars() {
+function Hero() {
   return (
-    <section className="border-y border-line">
-      <Container className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
-        {pillars.map(({ icon: Icon, title, text }) => (
-          <div key={title}>
-            <Icon aria-hidden className="size-5 text-brand" />
-            <p className="mt-3 font-medium">{title}</p>
-            <p className="mt-1 text-sm text-muted">{text}</p>
-          </div>
-        ))}
+    <section>
+      <Container className="py-16 text-center sm:py-24">
+        <p className="text-sm font-medium text-brand">{site.tagline}</p>
+        <h1 className="mx-auto mt-3 max-w-2xl text-4xl leading-tight sm:text-6xl">
+          Tech trouble? <span className="text-brand">Let's sort it.</span>
+        </h1>
+        <p className="mx-auto mt-5 max-w-md text-lg text-muted">
+          Friendly remote IT help for small businesses across {site.serviceArea}.
+        </p>
+
+        <ul className="mx-auto mt-12 grid max-w-4xl grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          {shortcuts.map((s) => {
+            const className = cx(
+              "flex h-full flex-col items-center gap-3 rounded-2xl border p-5 transition-colors sm:p-6",
+              s.primary
+                ? "border-brand bg-brand text-white hover:bg-brand-dark"
+                : "border-line bg-white hover:border-brand/40 hover:bg-brand-50/40",
+            );
+            const content = (
+              <>
+                <IconBadge icon={s.icon} solid={s.primary} />
+                <span className="font-medium">{s.label}</span>
+                <span className={cx("-mt-2 text-sm", s.primary ? "text-white/75" : "text-muted")}>
+                  {s.hint}
+                </span>
+              </>
+            );
+            return (
+              <li key={s.label}>
+                {s.external ? (
+                  <a href={s.to} target="_blank" rel="noreferrer" className={className}>
+                    {content}
+                  </a>
+                ) : (
+                  <Link to={s.to} className={className}>
+                    {content}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+
+        <p className="mt-6 flex items-center justify-center gap-2 text-sm text-muted">
+          <Check aria-hidden className="size-4 text-brand" />
+          You only pay once it's fixed.
+        </p>
       </Container>
     </section>
   );
@@ -106,62 +130,57 @@ function Pillars() {
 
 function Services() {
   return (
-    <section className="py-20 sm:py-28">
+    <section className="border-t border-line py-16 sm:py-20">
       <Container>
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeading
-            eyebrow="Services"
-            title="Everything your business needs to stay running."
-          />
-          <ArrowLink to="/services" className="shrink-0">
-            See plans and pricing
-          </ArrowLink>
+        <div className="flex items-end justify-between gap-6">
+          <h2 className="text-2xl sm:text-3xl">What we do</h2>
+          <ArrowLink to="/services">Pricing</ArrowLink>
         </div>
-
-        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
-          {coreServices.map(({ icon: Icon, title, text }) => (
-            <div key={title} className="bg-white p-8">
-              <span className="grid size-10 place-items-center rounded-lg bg-brand-50 text-brand">
-                <Icon aria-hidden className="size-5" />
-              </span>
-              <h3 className="mt-6 text-lg">{title}</h3>
-              <p className="mt-2 leading-relaxed text-muted">{text}</p>
-            </div>
+        <ul className="mt-10 grid gap-8 sm:grid-cols-3">
+          {services.map((s) => (
+            <li key={s.title} className="flex items-center gap-4 sm:flex-col sm:items-start">
+              <IconBadge icon={s.icon} />
+              <div>
+                <h3 className="text-lg">{s.title}</h3>
+                <p className="mt-1 text-sm text-muted">{s.text}</p>
+              </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </Container>
     </section>
   );
 }
 
-function HowItWorksPreview() {
-  const steps = [workflow[0], workflow[3], workflow[6], workflow[10]];
+function Steps() {
   return (
-    <section className="bg-subtle py-20 sm:py-28">
+    <section className="bg-subtle py-16 sm:py-20">
       <Container>
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeading
-            eyebrow="How it works"
-            title="From request to resolved, without leaving your desk."
-          />
-          <ArrowLink to="/how-it-works" className="shrink-0">
-            See all 11 steps
-          </ArrowLink>
+        <div className="flex items-end justify-between gap-6">
+          <h2 className="text-2xl sm:text-3xl">How it works</h2>
+          <ArrowLink to="/how-it-works">Details</ArrowLink>
         </div>
-
-        <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step) => {
-            const number = workflow.indexOf(step) + 1;
-            return (
-              <li key={step.title} className="border-t-2 border-brand pt-6">
-                <p className="text-sm font-medium text-brand">Step {number}</p>
-                <h3 className="mt-2 text-lg">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {step.note ?? step.text}
-                </p>
-              </li>
-            );
-          })}
+        <ol className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">
+          {steps.map((step, i) => (
+            <li key={step.title} className="flex flex-col items-center text-center">
+              <span className="relative">
+                <span className="grid size-16 place-items-center rounded-full bg-white text-brand ring-1 ring-line">
+                  <step.icon aria-hidden className="size-7" strokeWidth={1.75} />
+                </span>
+                <span
+                  aria-hidden
+                  className="absolute -right-1 -top-1 grid size-6 place-items-center rounded-full bg-brand text-xs font-semibold text-white"
+                >
+                  {i + 1}
+                </span>
+              </span>
+              <h3 className="mt-4 text-lg">
+                <span className="sr-only">Step {i + 1}: </span>
+                {step.title}
+              </h3>
+              <p className="mt-1 text-sm text-muted">{step.text}</p>
+            </li>
+          ))}
         </ol>
       </Container>
     </section>
@@ -170,24 +189,32 @@ function HowItWorksPreview() {
 
 function WhyUs() {
   return (
-    <section className="py-20 sm:py-28">
-      <Container className="grid gap-12 lg:grid-cols-[1fr_1.3fr]">
-        <SectionHeading
-          eyebrow="Why LDF Solutions"
-          title="IT help that feels personal."
-          intro="For small businesses, consultants and professionals who want reliable IT assistance without the overhead of a full-time IT team."
+    <section className="py-16 sm:py-24">
+      <Container className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+        <img
+          src="/images.jpeg"
+          alt="IT technician holding a server hard drive in a data centre"
+          width={596}
+          height={335}
+          loading="lazy"
+          className="mx-auto aspect-video w-full max-w-xl rounded-2xl object-cover lg:mx-0"
         />
-        <dl className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
-          {differentiators.map((item) => (
-            <div key={item.title}>
-              <dt className="flex items-center gap-2 font-medium">
-                <Check aria-hidden className="size-4 text-brand" />
+        <div>
+          <h2 className="text-2xl sm:text-3xl">IT help that feels personal.</h2>
+          <ul className="mt-8 space-y-4">
+            {differentiators.map((item) => (
+              <li key={item.title} className="flex items-center gap-3 text-lg">
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-brand-50 text-brand">
+                  <Check aria-hidden className="size-4" />
+                </span>
                 {item.title}
-              </dt>
-              <dd className="mt-2 text-sm leading-relaxed text-muted">{item.text}</dd>
-            </div>
-          ))}
-        </dl>
+              </li>
+            ))}
+          </ul>
+          <ArrowLink to="/about" className="mt-8">
+            About us
+          </ArrowLink>
+        </div>
       </Container>
     </section>
   );
