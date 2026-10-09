@@ -1,0 +1,207 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "routes/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/services": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/how-it-works": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/about": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/contact": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/report-issue": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/book": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "app/root.tsx",
+        "path": "",
+        "config": {}
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "app/routes/home.tsx",
+        "index": true,
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/services": {
+        "id": "routes/services",
+        "parentId": "root",
+        "file": "app/routes/services.tsx",
+        "path": "services",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/how-it-works": {
+        "id": "routes/how-it-works",
+        "parentId": "root",
+        "file": "app/routes/how-it-works.tsx",
+        "path": "how-it-works",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/about": {
+        "id": "routes/about",
+        "parentId": "root",
+        "file": "app/routes/about.tsx",
+        "path": "about",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/contact": {
+        "id": "routes/contact",
+        "parentId": "root",
+        "file": "app/routes/contact.tsx",
+        "path": "contact",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/report-issue": {
+        "id": "routes/report-issue",
+        "parentId": "root",
+        "file": "app/routes/report-issue.tsx",
+        "path": "report-issue",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/book": {
+        "id": "routes/book",
+        "parentId": "root",
+        "file": "app/routes/book.tsx",
+        "path": "book",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "/Users/lucasmiles/.gemini/antigravity/scratch/LFSOLUTIONS/app",
+    "basename": "/",
+    "buildDirectory": "/Users/lucasmiles/.gemini/antigravity/scratch/LFSOLUTIONS/build",
+    "future": {
+      "unstable_optimizeDeps": false,
+      "v8_passThroughRequests": false,
+      "v8_trailingSlashAwareDataRequests": false,
+      "unstable_previewServerPrerendering": false,
+      "v8_middleware": false,
+      "v8_splitRouteModules": false,
+      "v8_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "routes/home.tsx",
+        "index": true
+      },
+      "routes/services": {
+        "id": "routes/services",
+        "parentId": "root",
+        "file": "routes/services.tsx",
+        "path": "services"
+      },
+      "routes/how-it-works": {
+        "id": "routes/how-it-works",
+        "parentId": "root",
+        "file": "routes/how-it-works.tsx",
+        "path": "how-it-works"
+      },
+      "routes/about": {
+        "id": "routes/about",
+        "parentId": "root",
+        "file": "routes/about.tsx",
+        "path": "about"
+      },
+      "routes/contact": {
+        "id": "routes/contact",
+        "parentId": "root",
+        "file": "routes/contact.tsx",
+        "path": "contact"
+      },
+      "routes/report-issue": {
+        "id": "routes/report-issue",
+        "parentId": "root",
+        "file": "routes/report-issue.tsx",
+        "path": "report-issue"
+      },
+      "routes/book": {
+        "id": "routes/book",
+        "parentId": "root",
+        "file": "routes/book.tsx",
+        "path": "book"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "subResourceIntegrity": false,
+    "allowedActionOrigins": false,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "file": "routes/home.tsx",
+            "index": true
+          },
+          {
+            "file": "routes/services.tsx",
+            "path": "services"
+          },
+          {
+            "file": "routes/how-it-works.tsx",
+            "path": "how-it-works"
+          },
+          {
+            "file": "routes/about.tsx",
+            "path": "about"
+          },
+          {
+            "file": "routes/contact.tsx",
+            "path": "contact"
+          },
+          {
+            "file": "routes/report-issue.tsx",
+            "path": "report-issue"
+          },
+          {
+            "file": "routes/book.tsx",
+            "path": "book"
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}

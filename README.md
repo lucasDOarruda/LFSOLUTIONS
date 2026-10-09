@@ -35,7 +35,7 @@ Attachments are capped at 5 files / 4 MB total so requests stay under common ser
 
 ## Development
 
-Requires Node 22.22+ (or 24).
+Requires Node 22.22+ (`nvm use` picks it up from `.nvmrc`).
 
 ```bash
 npm install
@@ -45,6 +45,14 @@ npm run build
 npm start          # serves the production build on :3000
 ```
 
-## Deployment
+## Deployment (Vercel)
 
-Any Node host works. The included `Dockerfile` builds and runs the production server; pass the env vars above at runtime. For Vercel or Netlify, add the matching React Router adapter/preset, and the route actions deploy as serverless functions.
+The project is configured for Vercel through `@vercel/react-router` (see `react-router.config.ts`). Page rendering and the form actions run as Vercel Functions.
+
+1. On vercel.com, choose **Add New → Project** and import `lucasDOarruda/LFSOLUTIONS`. The framework is detected as React Router, so leave the build settings at their defaults.
+2. Under **Environment Variables**, add `RESEND_API_KEY`, `EMAIL_TO` and `EMAIL_FROM`.
+3. Deploy. Every push to `main` redeploys automatically, and pull requests get preview URLs.
+
+React Router is pinned to v7 because `@vercel/react-router` doesn't support v8 yet.
+
+The `Dockerfile` still works for any other Node host if needed.
